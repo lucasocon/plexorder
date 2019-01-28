@@ -2,17 +2,18 @@
 
 # Run Project
 
-REDIS: `redis-server`
-SIDEKIQ: `sidekiq`
-SERVER: `rails s`
+ 
+  redis-server
+  sidekiq
+  rails s
 
 # Run using Foreman
 
-`foreman start`
+  foreman start
 
 # Access to Admin Area
 
 Admin area was implemented with a devise login (gem devise), for be able to access to admin area, you should log in,  for that the `rake db:seed` creates an admin user with these credentials
 
-email: admin@orderplex.com
-password: OrderPlex2019@admin
+  email: admin@orderplex.com
+  password: OrderPlex2019@admin
