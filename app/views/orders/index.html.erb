@@ -1,0 +1,246 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-content">
+      <div class="card-body">
+        <div class="row test">
+          <div class="col-md-12">
+            <h5 id="title_filter_orders">Filter orders</h5>
+          </div>
+        </div>
+        <br>
+
+        <%= form_tag orders_path, method: :get do %>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="row">
+                  <label class="col-md-12 col-xs-12" for="order_id">Order ID</label>
+                </div>
+                <div class="row">
+                  <div class="col-md-9 col-xs-12">
+                    <%= text_field_tag 'order', params[:order], class: "form-control", id: "order_id", placeholder: "Enter order ID digits" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xs-12">
+              <div class="form-group">
+                <div class="row">
+                  <label class="col-md-12" for="dates">Order placed between dates</label>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-xs-6">
+                    <%= date_field_tag 'date_from', params[:date_from], class: "form-control", id: "date_from", placeholder: "From: mm/dd/yy" %>
+                  </div>
+                  <div class="col-md-6 col-xs-6">
+                    <%= date_field_tag 'date_to', params[:date_to], class: "form-control", id: "date_to", placeholder: "To: mm/dd/yy" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="row">
+                  <label class="col-md-12" for="dates">Order status</label>
+                </div>
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="checkbox">
+                      <label>
+                        <%= check_box_tag 'status[]', 'awaiting_pickup'%> 
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        Awaiting Shipment
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <%= check_box_tag 'status[]', 'in_transit'%>
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        Partialy Shipped
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <%= check_box_tag 'status[]', 'delivered'%>
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        Shipped
+                      </label>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-actions button_form_actions">
+              <%= submit_tag 'SEARCH', class: "btn btn-reset pull-right" %>
+              <%= link_to "RESET", orders_path, class: "btn btn-search pull-right" %>
+            </div>
+
+            <div class="col-md-12 pull-right">
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 20px"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="hidden-xs">
+          <table class="table">
+            <thead class="thead-light">
+              <tr style="background-color: #f1f1f1">
+                <th scope="col">Date</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.created_at.strftime("%m/%d/%Y") %></td>
+                  <td><%= order.id %></td>
+                  <td><%= order.customer_name %></td>
+                  <td><p class="btn btn-primary"><%=order.status.humanize%></p></td>
+                  <td><%= number_to_currency(order.product.price) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="hidden-lg">
+          <table class="table">
+            <thead>
+              <tr style="background-color: #d3d3d3">
+                <th>Orders (<%=@orders.length%>)</th>
+                <th/>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td>
+                    <div class="text-center">
+                      # <%= order.id %>
+                      <p class="font-weight-bold"><%= order.customer_name %></p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="text-center">
+                      <%= order.created_at.strftime("%m/%d/%Y") %>
+                      <br>
+                      <p class="btn btn-primary"><%=order.status.humanize%></p>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title modal-title-order" style="display: inline; font-weight:bold;">Create new order</h4>
+            <h5 class="modal-title" style="display: inline;">Today <%= Date.today.strftime("%m/%d/%Y")%></h5>
+          </div>
+        </div>
+        <br>
+        <%= form_with(model: Order.new, local: true) do |form| %>
+          <div class="form-group">
+            <div class="row">
+              <%= form.label :product_id, { class: "col-md-12"} %>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <%= form.select(:product_id, [] ,{:include_blank => "Select a Product"}, {class: "", id: "product_id"}) %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <%= form.label :customer_name, { class: "col-md-12" } %>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <%= form.text_field :customer_name, { class: "form-control", id: "custom_name", placeholder: "Full name"} %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <%= form.label :full_address, { class: "col-md-12" } %>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <%= form.text_field :full_address, { class: "form-control", id: "full_address", placeholder: "Including apt number"} %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <%= form.label :zip_code, { class: "col-md-12" } %>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <%= form.text_field :zip_code, { class: "form-control", id: "zip_code", placeholder: "5 digit zip code"} %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <%= form.label :shipping_method, { class: "col-md-12"} %>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <%= form.select(:shipping_method, Order.shipping_methods.keys.map {|key| [ key.humanize, key]},{:include_blank => "Select a type"}, {class: "form-control", id: "shipping_method"}) %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= form.submit "CREATE ORDER", { class: "btn btn-default create-order-button-modal pull-left" } %>
+            <button type="button" class="btn btn-default cancel-button-modal pull-left" data-dismiss="modal">CANCEL</button>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+    
+  </div>
+</div>

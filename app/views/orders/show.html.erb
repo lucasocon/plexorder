@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @order.product.name %>
+</p>
+
+<p>
+  <strong>Customer name:</strong>
+  <%= @order.customer_name %>
+</p>
+
+<p>
+  <strong>Full address:</strong>
+  <%= @order.full_address %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @order.zip_code %>
+</p>
+
+<p>
+  <strong>Shipping method:</strong>
+  <%= @order.shipping_method %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @order.status %>
+</p>
+
+<%= link_to 'Back', orders_path %>

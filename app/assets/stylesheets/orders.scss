@@ -1,0 +1,144 @@
+
+nav.navbar-default{
+  background-color: #404040;
+}
+
+#title_left{
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.navbar-nav > li > a .active {
+  color: #ffffff !important;
+  vertical-align: bottom;
+}
+
+#tabs_buttons  {
+  vertical-align: bottom;
+}
+
+.navbar-default:hover .navbar-nav>.active:not(:hover) > a {
+  color: white;
+}
+
+.custom-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.navbar{
+  height: 75px;
+  @media only screen and (max-width: 600px) {
+    height: 90px
+  }
+}
+
+a#title_left{
+  margin-top: 11px;
+  margin-left: 10px;
+  font-size: 32px;
+}
+
+a.each_tab{
+  margin-top: 22px;
+  margin-left: 14px;
+  min-width: 100px;
+  font-size: 15px;
+  color: white !important;
+}
+
+.selected {
+  &:before{
+      border-bottom: solid 6px orange;
+  } &:after{
+      border-bottom: solid 6px orange;
+  }
+  border-bottom: solid 6px orange;
+}
+
+
+.btn_order{
+  margin-top: 37px;
+  margin-right: 40px;
+  border-radius: 50px;
+  width: 203px;
+  height: 54px;
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+}
+
+.card{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+#title_filter_orders{
+  font-weight: bold;
+  /*margin-left: 15px;*/
+  /*margin-top: 20px;*/
+  font-size: 20px;
+}
+
+.button_form_actions{
+  margin-right: 25px;
+}
+
+.btn-search{
+  margin-right: 10px;
+  color: #7FFF00;
+  font-weight: bold;
+}
+
+.btn-reset{
+  color: white;
+  background-color: #7FFF00;
+
+}
+
+.checkbox label:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.checkbox .cr {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #a9a9a9;
+  border-radius: .25em;
+  width: 1.3em;
+  height: 1.3em;
+  float: left;
+  margin-right: .5em;
+}
+
+.checkbox .cr .cr-icon {
+  position: absolute;
+  font-size: .8em;
+  line-height: 0;
+  top: 50%;
+  left: 15%;
+}
+
+.checkbox label input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox label input[type="checkbox"]+.cr>.cr-icon {
+  opacity: 0;
+}
+
+.checkbox label input[type="checkbox"]:checked+.cr>.cr-icon {
+  opacity: 1;
+  color: green;
+}
+
+.checkbox label input[type="checkbox"]:disabled+.cr {
+  opacity: .5;
+}
