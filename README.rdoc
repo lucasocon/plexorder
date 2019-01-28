@@ -1,16 +1,14 @@
 # README
 
-Please refer to INSTRUCTIONS.html for this project's instructions. Don't use
-the Rails server to load the file, instead just open it as a file in your
-browser (simply double-click on it).
-
-
 # Run Project
 
-Run redis-server
-Run sidekiq
-Run rails s
+REDIS: `redis-server`
+SIDEKIQ: `sidekiq`
+SERVER: `rails s`
 
+# Run using Foreman
+
+`foreman start`
 
 # Access to Admin Area
 
