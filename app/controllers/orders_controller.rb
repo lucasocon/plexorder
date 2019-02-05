@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = if params[:order] || params[:date_from] || params[:date_to] || params[:awaiting_pickup] || params[:in_transit] || params[:delivered]
+    @orders = if params[:order] || params[:date_from] || params[:date_to] || params[:status]
       Order.search_by_filters(params)
     else
       Order.all
